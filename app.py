@@ -3,16 +3,16 @@ from tkinter import messagebox
 import random
 
 # Subjects
-singular_subjects = ["He", "She", "The cat", "A boy"]
-plural_subjects = ["They", "We", "The cats", "Some boys"]
+singular_subjects = ["He", "She", "The cat", "A boy", "A girl", "A professor", "A student", "your mom"]
+plural_subjects = ["They", "We", "The cats", "Some boys", "Some girls", "some professors", "some students", "your friends"]
 
 # Verbs and rules for "to" inclusion
 verbs_with_to = ["go", "run", "travel"]
 verbs_without_to = ["eat", "play", "watch", "see"]
 
 # Objects
-objects_needing_to = ["the park", "school", "the store"]
-objects_no_to = ["an apple", "football", "a movie", "fast"]
+objects_needing_to = ["the park", "school", "the store", "the library", "the bar", "the pub"]
+objects_no_to = ["an apple", "football", "a movie", "fast", "quickly", "a video game"]
 
 # Answered / correct and percentage for score
 answered = 0
@@ -87,7 +87,8 @@ def populate_words_frame(words):
         score_frame.destroy()
         score_frame = tk.Frame(window)
         score_frame.pack(pady=10)
-        score_label = tk.Label(score_frame, text=f"Answered: {answered}  Correct: {correct}  Percentage: {correct / answered}%", font=("Arial", 14))
+        percentage = f"{(correct / answered)*100:.2f}"
+        score_label = tk.Label(score_frame, text=f"Answered: {answered}  Correct: {correct}  Percentage: {percentage}%", font=("Arial", 14))
         score_label.pack(pady=10)
 
 
