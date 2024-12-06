@@ -14,6 +14,10 @@ verbs_without_to = ["eat", "play", "watch", "see"]
 objects_needing_to = ["the park", "school", "the store"]
 objects_no_to = ["an apple", "football", "a movie", "fast"]
 
+# Answered / correct and percentage for score
+answered = 0
+correct = 0
+
 def generate_sentence():
     # Randomly select subject, verb, and object
     if random.choice([True, False]):  # Randomly decide singular or plural
@@ -70,12 +74,22 @@ def generate_challenge():
 
 def populate_words_frame(words):
     global words_frame
+    global score_frame
     words_frame = tk.Frame(window)
     words_frame.pack(pady=10)
 
     for word in words:
         word_button = tk.Button(words_frame, text=word, font=("Arial", 12), command=lambda w=word: select_word(w))
         word_button.pack(side=tk.LEFT, padx=5)
+    
+    # show score at bottom (?)
+    if answered > 0:
+        score_frame.destroy()
+        score_frame = tk.Frame(window)
+        score_frame.pack(pady=10)
+        score_label = tk.Label(score_frame, text=f"Answered: {answered}  Correct: {correct}  Percentage: {correct / answered}%", font=("Arial", 14))
+        score_label.pack(pady=10)
+
 
 def select_word(word):
     user_sentence_var.set(user_sentence_var.get() + word + " ")
@@ -87,9 +101,13 @@ def remove_last_word():
         user_sentence_var.set(" ".join(current_sentence) + " ")
 
 def check_sentence():
+    global answered
+    global correct
     user_sentence = user_sentence_var.get().strip() + "."
+    answered = answered + 1
     if user_sentence == current_correct_sentence:
         messagebox.showinfo("Result", "Correct! Well done!")
+        correct = correct + 1
     else:
         messagebox.showerror("Result", f"Incorrect. The correct sentence is:\n{current_correct_sentence}")
     # Reset for the next challenge
@@ -123,6 +141,10 @@ check_button.pack(side=tk.LEFT, padx=10)
 
 remove_button = tk.Button(button_frame, text="Remove Last Word", font=("Arial", 14), command=remove_last_word)
 remove_button.pack(side=tk.LEFT, padx=10)
+
+# frame for score at bottom
+score_frame = tk.Frame(window)
+score_frame.pack(pady=0)
 
 # Generate a challenge initially
 current_correct_sentence = ""
