@@ -1,8 +1,0 @@
-Python + Tkinter (GUI)
-
-App to help gramatical structure (ordering of words) of english for beginer learners
-- need to figure out most common trouble area
-- need to learn tkinter library for GUI elements
-- need to define why this is better than something like a ChatGPT or DuoLingo (offline?)
-
-need done shortly after thanksgiving break
